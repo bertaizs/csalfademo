@@ -10,7 +10,7 @@ var options = {
     tree_dir: "fa",     // without / at the end
 
     html_header: `<h1>Csalfa Family Tree</h1><hr/>`,
-    html_footer: `<hr/>footer`,
+    html_footer: `<hr/>`+new Date(),
 
     log_data: false,
     log_read_entities: true,

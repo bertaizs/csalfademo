@@ -64,6 +64,9 @@ function personPage(who) {
         <p>${who.getMother() ? lang("Mother")+": "+people[who.getMother().id].getNameLink() : "" }</p>
 
         ${
+            who.getSiblings().length>0 ? "<p>"+lang("Siblings")+": "+listPeopleLinks(who.getSiblings()) : ""
+        }
+        ${
             who.getChildren().length>0 ? "<p>"+lang("Children")+": "+listPeopleLinks(who.getChildren()) : ""
         }
 
@@ -73,7 +76,7 @@ function personPage(who) {
     </tr></table>
     
 
-    ${options.html_footer}
+    <div class="footer">${options.html_footer}</div>
     </body>
     </html>
     `

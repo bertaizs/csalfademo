@@ -17,9 +17,6 @@ class Person {
     constructor(person_node) {
         this.id = person_node['$'].id
 
-
-
-        
         this.read('family_name', person_node)
         this.read('given_name', person_node)
         this.read('comment', person_node)
@@ -53,6 +50,11 @@ class Person {
     getChildren() {
         return filterPeople(x=>(x.getFather()==this || x.getMother()==this))
     }
+
+    getSiblings() {
+        return filterPeople(x=>((x.getFather()==this.getFather() || x.getMother()==this.getMother())) && x!=this )
+    }
+
 
     getName() {
         if( 'family_name' in this && 'given_name' in this ) {

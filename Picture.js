@@ -11,16 +11,22 @@ const pictures = globals.pictures
 class Picture {
 
 
+
     // creates this Picture by parsing the xml element of picture_node
     constructor(xml_node) {
         this.file = xml_node['$'].file
         if( tag('comment') in xml_node['$'] )
-            this.comment = xml_node['$'].comment
-        
+            this.comment = xml_node['$'][tag('comment')]
+
+        if( tag('name') in xml_node['$'] )
+            this.name = xml_node['$'][tag('name')]
+
         this.shown = []
         if( tag('shown') in xml_node )
             this.shown = xml_node[tag('shown')]
         this.shown = this.shown.map( x=>x['$'][tag('who')])
+        // !!! TODO:  handle where we have a name only about who is on the picture
+        // !!! TODO:  newline
 
         pictures.push(this)
 
@@ -36,7 +42,11 @@ class Picture {
         let s = ''
         s+= `<p>
         <a href="${this.file}"><img src="${this.file}" class="pic"/></a> <br/>
-        ${this.shown.map(x=>people[x].getNameLink()).join(", ")}
+        ${this.shown.map(x=>{
+                if(x in people) return people[x].getNameLink()
+                return x
+            }).join(", ")
+        }
         ${'comment' in this ? "<br/>"+this.comment : ""}
         </p>`
         return s
