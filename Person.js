@@ -16,28 +16,26 @@ class Person {
     // creates this Person by parsing the xml element of person_node
     constructor(person_node) {
         this.id = person_node['$'].id
-        for( let i in person_node ) {
-            if( i!='$')
-                this[i] = person_node[i]
-        }
-        console.log(this.id)
 
         this.read('family_name', person_node)
         this.read('given_name', person_node)
+        this.read('comment', person_node)
+        this.read('born_year', person_node)
+        this.read('died_year', person_node)
 
-        if( tag('father') in this )
-            this['father'] = this[tag('father')]['$'].id
-        if( tag('mother') in this )
-            this['mother'] = this[tag('mother')]['$'].id
+        if( tag('father') in person_node )
+            this['father'] = person_node[tag('father')][0]['$'].id
+
+        if( tag('mother') in person_node )
+            this['mother'] = person_node[tag('mother')][0]['$'].id
 
         people[this.id] = this
-
-
         options.log_read_entities || console.log(this.id)
     }
 
-    read(tagname, person_node) {
-        this[tagname] = person_node[tag(tagname)]
+    read(tagname, xml_node, first_only = true) {
+        if( tag(tagname) in xml_node )
+            this[tagname] = first_only ? xml_node[tag(tagname)][0] : xml_node[tag(tagname)]
     }
 
     getFather() {
@@ -88,6 +86,11 @@ class Person {
 
     getBirthAndDeathDates() {
         return (this.getBirthDate()||"")+' &ndash; '+(this.getDeathDate()||"")
+    }
+
+    getComment() {
+        if( 'comment' in this ) return this.comment
+        return ""
     }
 
 }

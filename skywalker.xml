@@ -31,6 +31,8 @@
 
 		<born_year>41 BBY</born_year>
 		<died_year>4 ABY</died_year>
+
+		<comment>joined the dark side as Darth Vader</comment>
 	</person>
 
 	<person id="PadmeAmidala">

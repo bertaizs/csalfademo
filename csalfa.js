@@ -24,6 +24,7 @@ const listPeopleLinks = utils.listPeopleLinks
 const globals  = require('./globals.js')
 const people = globals.people
 const parser = globals.parser
+const pictures = globals.pictures
 
 
 
@@ -45,7 +46,7 @@ function personPage(who) {
 	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'/>
 	<style>
-.adatlap_kep {
+.pic {
 	border: 0px solid red;
 	max-width: 90%;
 	max-height: 80vh;
@@ -57,7 +58,9 @@ function personPage(who) {
 
 
     <table style="border: 1px solid black; width: 100%;"><tr>
-    <td style="width: 50%;">pictures</td>
+    <td style="width: 50%;">${
+        pictures.filter(x=>x.shown.includes(who.getId())).map(x=>x.getHtml()).join("\n")
+    }</td>
     <td style="width: 50%;">
         <h2>${who.getName()}</h2>
 
@@ -70,6 +73,7 @@ function personPage(who) {
             who.getChildren().length>0 ? "<p>"+lang("Children")+": "+listPeopleLinks(who.getChildren()) : ""
         }
 
+        ${ who.getComment() }
 
     </td>
     </tr></table>
@@ -141,7 +145,8 @@ function csalfagen(data) {
         new Picture(data[tag('picture')][i])
         console.log("pic")
     }
-    throw "aaa"
+    // console.log(people)
+
 
 
     options.log_people && console.log( people )

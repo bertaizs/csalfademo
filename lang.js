@@ -17,6 +17,8 @@ var magyar = {
     'given_name': 'keresztnév',
     'name': 'név',
 
+    'comment': 'megjegyzés',
+
     'picture':  'kép',
     'shown':    'látszik',
     'who':      'ki',
