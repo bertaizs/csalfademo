@@ -1,8 +1,9 @@
 
 var options = require('./options.js')
 
-var utils = require('./utils.js')
-var tag = utils.tag
+const utils = require('./utils.js')
+const tag = utils.tag
+const ref2id = utils.ref2id
 
 const globals  = require('./globals.js')
 const people = globals.people
@@ -24,7 +25,7 @@ class Picture {
         this.shown = []
         if( tag('shown') in xml_node )
             this.shown = xml_node[tag('shown')]
-        this.shown = this.shown.map( x=>x['$'][tag('who')])
+        this.shown = this.shown.map( ref2id( x=>x['$'][tag('who')] ) )
         // !!! TODO:  handle where we have a name only about who is on the picture
         // !!! TODO:  support newline
 
