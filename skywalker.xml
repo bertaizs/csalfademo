@@ -75,10 +75,52 @@
 	<picture file="https://static.wikia.nocookie.net/starwars/images/6/6c/LukeSkywalker-RotJAVA.png/revision/latest?cb=20250314013820" comment="Return of the Jedi">
 		<shown who="LukeSkywalker"/>
 	</picture>
-
 	<picture file="https://static.wikia.nocookie.net/starwars/images/3/3d/LukeSkywalker.png/revision/latest?cb=20241221010122" comment="Old Luke">
 		<shown who="LukeSkywalker"/>
 	</picture>
+
+	<picture file="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/revision/latest?cb=20130621175844" comment="Anakin during the Clone Wars">
+		<shown who="AnakinSkywalker"/>
+	</picture>
+	<picture file="https://static.wikia.nocookie.net/starwars/images/d/d3/Anakin32BBY.png/revision/latest?cb=20241221123920" comment="Young Anakin during the Phantom Menance">
+		<shown who="AnakinSkywalker"/>
+	</picture>
+	<picture file="https://static.wikia.nocookie.net/starwars/images/9/94/Vaderrotj.jpg/revision/latest?cb=20070418231644" comment="as Darth Vader">
+		<shown who="AnakinSkywalker"/>
+	</picture>
+
+	<picture file="https://static.wikia.nocookie.net/starwars/images/7/71/Lukevaderesb.png/revision/latest?cb=20201017142105" >
+		<shown who="LukeSkywalker"/>
+		<shown who="AnakinSkywalker"/>
+	</picture>
+
+	<picture file="https://static.wikia.nocookie.net/starwars/images/1/14/Got_A_Bad_feeling.jpg/revision/latest?cb=20070922141109" comment="Aboard the Millenium Falcon">
+		<shown who="Chewbacca"/>
+		<shown who="LukeSkywalker"/>
+		<shown who="Obi-Wan Kenobi"/>
+		<shown who="Han Solo"/>
+	</picture>
+
+
+	<picture file="https://static.wikia.nocookie.net/starwars/images/b/b2/Padmegreenscrshot.jpg/revision/latest?cb=20100423143631">
+		<shown who="PadmeAmidala"/>
+	</picture>
+
+	<picture file="https://static.wikia.nocookie.net/starwars/images/9/9b/Princessleiaheadwithgun.jpg/revision/latest?cb=20240522043127">
+		<shown who="LeiaOrgana"/>
+	</picture>
+
+	<picture file="https://static.wikia.nocookie.net/starwars/images/d/d9/HanSolo0BBY-TSWB.png/revision/latest?cb=20241220234647">
+		<shown who="HanSolo"/>
+	</picture>
+
+	<picture file="https://static.wikia.nocookie.net/starwars/images/b/bc/KyloRenVFcover-TROS.png/revision/latest?cb=20250126000852">
+		<shown who="BenSolo"/>
+	</picture>
+	<picture file="https://static.wikia.nocookie.net/starwars/images/a/a8/KyloRenHelmeted-TROS.png/revision/latest?cb=20250126001318" comment="Ben Solo as Kylo Ren">
+		<shown who="BenSolo"/>
+	</picture>
+
 
 </family>
 
