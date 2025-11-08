@@ -22,6 +22,9 @@ class Person {
         }
         console.log(this.id)
 
+        this.read('family_name', person_node)
+        this.read('given_name', person_node)
+
         if( tag('father') in this )
             this['father'] = this[tag('father')]['$'].id
         if( tag('mother') in this )
@@ -29,12 +32,20 @@ class Person {
 
         people[this.id] = this
 
+
         options.log_read_entities || console.log(this.id)
+    }
+
+    read(tagname, person_node) {
+        this[tagname] = person_node[tag(tagname)]
+        // console.log(person_node)
+        // throw "mmmm"
+
     }
 
     getFather() {
         if( 'father' in this && this.father in people ) return people[this.father]
-        return false
+        return null
     }
     getMother() {
         if( 'mother' in this && this.mother in people ) return people[this.mother]
@@ -46,7 +57,13 @@ class Person {
     }
 
     getName() {
-        return this['surname']+" "+this['given_name']
+        if( 'family_name' in this && 'given_name' in this ) {
+            if( options.output_lang.family_name_first )
+                return this['family_name']+" "+this['given_name']   // in e.g. Hungarian
+            else
+                return this['given_name']+" "+this['family_name']   // in e.g. English
+        }
+        return false
     }
 
     getId() { return this.id }

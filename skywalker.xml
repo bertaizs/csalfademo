@@ -2,7 +2,7 @@
 <family xmlns="http://www.berta.hu/xmlns/csalfa">
 
 	<person id="LukeSkywalker">
-		<surname>Skywalker</surname>
+		<family_name>Skywalker</family_name>
 		<given_name>Luke</given_name>
 
 		<born_year>19 BBY</born_year>
@@ -12,7 +12,7 @@
 	</person>
 
 	<person id="LeiaOrgana">
-		<surname>Organa</surname>
+		<family_name>Organa</family_name>
 		<given_name>Leia</given_name>
 		<name>Leia Skywalker Organa Solo</name>
 
@@ -23,7 +23,7 @@
 	</person>
 
 	<person id="AnakinSkywalker">
-		<surname>Skywalker</surname>
+		<family_name>Skywalker</family_name>
 		<given_name>Anakin</given_name>
 		<name>Darth Vader</name>
 
@@ -34,14 +34,14 @@
 	</person>
 
 	<person id="PadmeAmidala">
-		<surname>Amidala</surname>
+		<family_name>Amidala</family_name>
 		<given_name>Padmé</given_name>
 		<born_year>46 BBY</born_year>
 		<died_year>19 BBY</died_year>
 	</person>
 
 	<person id="ShmiSkywalker">
-		<surname>Skywalker</surname>
+		<family_name>Skywalker</family_name>
 		<given_name>Shmi</given_name>
 
 		<born_year>by 66 BBY</born_year>
@@ -49,14 +49,14 @@
 	</person>
 
 	<person id="HanSolo">
-		<surname>Solo</surname>
+		<family_name>Solo</family_name>
 		<given_name>Han</given_name>
 		<born_year>32 BBY</born_year>
 		<died_year>34 ABY</died_year>
 	</person>
 
 	<person id="BenSolo">
-		<surname>Solo</surname>
+		<family_name>Solo</family_name>
 		<given_name>Ben</given_name>
 		<name>Kylo Ren</name>
 
