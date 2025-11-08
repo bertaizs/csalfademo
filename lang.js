@@ -17,6 +17,15 @@ var magyar = {
     'given_name': 'keresztnév',
     'name': 'név',
 
+    'born_year': 'születési_év',
+    'born_month': 'születési_hónap',
+    'born_day': 'születési_nap',
+    'born_place': 'születési_hely',
+    'died_year': 'halálozási_év',
+    'died_month': 'halálozási_hónap',
+    'died_day': 'halálozási_nap',
+    'died_place': 'halálozási_place',
+
     'comment': 'megjegyzés',
 
     'picture':  'kép',
