@@ -5,8 +5,16 @@ var english = {
 }
 
 var magyar = {
+    // tags
     'family': 'család',
     'person': 'személy',
+    'father': 'apja',
+    'mother': 'anyja',
+
+    // strings
+    "Father": "Apja",
+    "Mother": "Anyja",
+    "Childeren": "Gyermekei",
 }
 
 

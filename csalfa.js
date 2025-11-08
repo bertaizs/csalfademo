@@ -7,17 +7,22 @@ const xml2js = require('xml2js');
 
 const Person = require('./Person.js')
 
-var options = require('./options.js')
+const options = require('./options.js')
 
 const REPL = require('repl')
 
 const xmlFilePath = path.join(__dirname, options.input_file);
 
 var utils = require('./utils.js')
-var tag = utils.tag
+const tag = utils.tag
+const lang = utils.lang
+const listPeopleLinks = utils.listPeopleLinks
 
-var people = {}
 
+const globals  = require('./globals.js')
+const people = globals.people
+
+console.log(people)
 
 
 
@@ -33,6 +38,7 @@ function createFile( filename, content ) {
 }
 
 function personPage(who) {
+    console.log( "personpage: "+who.id)
     let s=""
     s+= `<html><head>
     <title>${who.getName()}</title>
@@ -55,9 +61,15 @@ function personPage(who) {
     <td style="width: 50%;">
         <h2>${who.getName()}</h2>
 
-        <p>(${who.getBirthDate()+' &ndash; '+( who.getDeathDate() || "" )})</p>
+        <p>(${(who.getBirthDate()||"")+' &ndash; '+( who.getDeathDate() || "" )})</p>
+    
+        <p>${who.getFather() ? lang("Father")+": "+people[who.getFather().id].getNameLink() : "" }</p>
+        <p>${who.getMother() ? lang("Mother")+": "+people[who.getMother().id].getNameLink() : "" }</p>
 
-        this is the page of ${who.getName()}.
+        ${
+            who.getChildren().length>0 ? "<p>"+lang("Children")+": "+listPeopleLinks(who.getChildren()) : ""
+        }
+
 
     </td>
     </tr></table>
@@ -128,29 +140,29 @@ function csalfagen(data) {
 
     for( let i in data[tag('person')] ) {
         let p = new Person(data[tag('person')][i])
-        people[p.id] = p
     }
 
     options.log_people && console.log( people )
 
-    console.log("--------")
+    console.log("--------") // this is the place to test new features
+
+
+    // console.log( people['LukeSkywalker'].getFather().getNameLink() )
+    // let kids = people['AnakinSkywalker'].getChildren()
+    // console.log( listPeopleLinks(kids) )
 
 
     try {
         if (!fs.existsSync(options.tree_dir)) {
             fs.mkdirSync(options.tree_dir);
         }
-        
+
         for( let i in people )
             createFile( options.tree_dir+'/'+people[i].getFileName(), personPage(people[i]) )
 
     } catch (err) {
         console.error(err);
     }
-
-
-    // createFile("test.txt", "isti vagyok!")
-    // createFile('luke.html', personPage(people['LukeSkywalker']))
 
     console.log("vége.")
 

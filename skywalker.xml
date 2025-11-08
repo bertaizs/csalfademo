@@ -27,6 +27,8 @@
 		<given_name>Anakin</given_name>
 		<name>Darth Vader</name>
 
+		<mother id="ShmiSkywalker"/>
+
 		<born_year>41 BBY</born_year>
 		<died_year>4 ABY</died_year>
 	</person>
@@ -36,6 +38,14 @@
 		<given_name>Padmé</given_name>
 		<born_year>46 BBY</born_year>
 		<died_year>19 BBY</died_year>
+	</person>
+
+	<person id="ShmiSkywalker">
+		<surname>Skywalker</surname>
+		<given_name>Shmi</given_name>
+
+		<born_year>by 66 BBY</born_year>
+		<died_year>22 BBY</died_year>
 	</person>
 
 	<person id="HanSolo">

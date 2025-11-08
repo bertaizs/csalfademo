@@ -4,6 +4,12 @@ var options = require('./options.js')
 
 var utils = require('./utils.js')
 var tag = utils.tag
+const filterPeople = utils.filterPeople
+
+const globals  = require('./globals.js')
+const people = globals.people
+
+
 
 class Person {
 
@@ -21,16 +27,22 @@ class Person {
         if( tag('mother') in this )
             this['mother'] = this[tag('mother')]['$'].id
 
+        people[this.id] = this
+
         options.log_read_entities || console.log(this.id)
     }
 
     getFather() {
         if( 'father' in this && this.father in people ) return people[this.father]
-        return null
+        return false
     }
     getMother() {
         if( 'mother' in this && this.mother in people ) return people[this.mother]
         return null
+    }
+
+    getChildren() {
+        return filterPeople(x=>(x.getFather()==this || x.getMother()==this))
     }
 
     getName() {
@@ -48,7 +60,10 @@ class Person {
     }
 
     getBirthDate() {
-        return this.born_year
+        if( 'born_year' in this ) {
+            return this.born_year
+        }
+        else return false
     }
     getDeathDate() {
         if( 'died_year' in this ) {
