@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<family xmlns="http://www.berta.hu/xmlns/csalfa">
+
+	<person id="LukeSkywalker">
+		<surname>Skywalker</surname>
+		<given_name>Luke</given_name>
+
+		<born_year>19 BBY</born_year>
+		<died_year>34 ABY</died_year>
+		<father id="AnakinSkywalker"/>
+		<mother id="PadmeAmidala"/>
+	</person>
+
+	<person id="LeiaOrgana">
+		<surname>Organa</surname>
+		<given_name>Leia</given_name>
+		<name>Leia Skywalker Organa Solo</name>
+
+		<born_year>19 BBY</born_year>
+		<died_year>35 ABY</died_year>
+		<father id="AnakinSkywalker"/>
+		<mother id="PadmeAmidala"/>
+	</person>
+
+	<person id="AnakinSkywalker">
+		<surname>Skywalker</surname>
+		<given_name>Anakin</given_name>
+		<name>Darth Vader</name>
+
+		<born_year>41 BBY</born_year>
+		<died_year>4 ABY</died_year>
+	</person>
+
+	<person id="PadmeAmidala">
+		<surname>Amidala</surname>
+		<given_name>Padmé</given_name>
+		<born_year>46 BBY</born_year>
+		<died_year>19 BBY</died_year>
+	</person>
+
+	<person id="HanSolo">
+		<surname>Solo</surname>
+		<given_name>Han</given_name>
+		<born_year>32 BBY</born_year>
+		<died_year>34 ABY</died_year>
+	</person>
+
+	<person id="BenSolo">
+		<surname>Solo</surname>
+		<given_name>Ben</given_name>
+		<name>Kylo Ren</name>
+
+		<born_year>5 ABY</born_year>
+		<died_year>35 ABY</died_year>
+
+		<father id="HanSolo"/>
+		<mother id="LeiaOrgana"/>
+	</person>
+
+	<marriage who="AnakinSkywalker" whom="PadmeAmidala"/>
+	<marriage who="HanSolo" whom="LeiaOrgana" when="34 ABY"/>
+
+</family>
+
