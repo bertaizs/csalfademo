@@ -2,9 +2,10 @@
 
 var options = require('./options.js')
 
-var utils = require('./utils.js')
-var tag = utils.tag
+const utils = require('./utils.js')
+const tag = utils.tag
 const filterPeople = utils.filterPeople
+const ref2id = utils.ref2id
 
 const globals  = require('./globals.js')
 const people = globals.people
@@ -15,7 +16,7 @@ class Person {
 
     // creates this Person by parsing the xml element of person_node
     constructor(person_node) {
-        this.id = person_node['$'].id
+        this.id = ref2id(person_node['$'].id)
 
         this.read('family_name', person_node)
         this.read('given_name', person_node)
@@ -24,10 +25,10 @@ class Person {
         this.read('died_year', person_node)
 
         if( tag('father') in person_node )
-            this['father'] = person_node[tag('father')][0]['$'].id
+            this['father'] = ref2id( person_node[tag('father')][0]['$'].id )
 
         if( tag('mother') in person_node )
-            this['mother'] = person_node[tag('mother')][0]['$'].id
+            this['mother'] = ref2id( person_node[tag('mother')][0]['$'].id )
 
         people[this.id] = this
         options.log_read_entities && console.log(this.id)
