@@ -42,7 +42,7 @@ class Picture {
     getHtml() {
         let s = ''
         s+= `<p>
-        <a href="${this.file}" target="_top"><img src="${this.file}" class="pic"/></a> <br/>
+        <a href="${this.file}" target="_blank"><img src="${this.file}" class="pic"/></a> <br/>
         ${this.shown.map(x=>{
                 if(x in people) return people[x].getNameLink()
                 return x
