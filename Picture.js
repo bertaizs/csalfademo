@@ -26,11 +26,11 @@ class Picture {
             this.shown = xml_node[tag('shown')]
         this.shown = this.shown.map( x=>x['$'][tag('who')])
         // !!! TODO:  handle where we have a name only about who is on the picture
-        // !!! TODO:  newline
+        // !!! TODO:  support newline
 
         pictures.push(this)
 
-        options.log_read_entities || console.log("picture...")
+        options.log_read_entities && console.log("picture: "+this.file.substring(0,70))
     }
 
     // read(tagname, xml_node) {

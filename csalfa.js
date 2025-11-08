@@ -9,11 +9,10 @@ const path = require('path');
 const Person = require('./Person.js')
 const Picture = require('./Picture.js')
 
+const languages = require('./lang.js')
 const options = require('./options.js')
 
 const REPL = require('repl')
-
-const xmlFilePath = path.join(__dirname, options.input_file);
 
 var utils = require('./utils.js')
 const tag = utils.tag
@@ -89,6 +88,22 @@ function personPage(who) {
  */
 
 
+options.log_args && console.log( process.argv )
+
+if( process.argv.length>=2)
+    options.input_file = process.argv[2]
+if( process.argv.length>=3)
+    options.input_lang = languages[process.argv[3]]
+if( process.argv.length>=4)
+    options.output_lang = languages[process.argv[4]]
+
+
+var xmlFilePath = path.join(__dirname, options.input_file);
+
+// console.log( options )
+
+// throw "kilép"
+
 
 // parse the XML file and call csalfagen() if all goes well
 function parseXmlFile() {
@@ -131,31 +146,28 @@ if (fs.existsSync(xmlFilePath)) {
 
 
 function csalfagen(data) {
-    console.log("--- csalfagen ---")
+    console.log("--- interpreting xml entities ---")
     options.log_data && console.log(data)
 
     for( let i in data[tag('person')] ) {
         new Person(data[tag('person')][i])
     }
+    options.log_people && console.log( people )
 
     for( let i in data[tag('picture')] ) {
         new Picture(data[tag('picture')][i])
-        console.log("pic")
     }
-    // console.log(people)
 
 
-
-    options.log_people && console.log( people )
-
-    console.log("--------") // this is the place to test new features
-
+    console.log("--- processing test cases ---")
 
     // console.log( people['LukeSkywalker'].getFather().getNameLink() )
     // let kids = people['AnakinSkywalker'].getChildren()
     // console.log( listPeopleLinks(kids) )
 
 
+
+    console.log("--- generating output ---")
     try {
         if (!fs.existsSync(options.tree_dir)) {
             fs.mkdirSync(options.tree_dir);

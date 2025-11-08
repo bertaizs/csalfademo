@@ -30,12 +30,15 @@ class Person {
             this['mother'] = person_node[tag('mother')][0]['$'].id
 
         people[this.id] = this
-        options.log_read_entities || console.log(this.id)
+        options.log_read_entities && console.log(this.id)
     }
 
-    read(tagname, xml_node, first_only = true) {
-        if( tag(tagname) in xml_node )
-            this[tagname] = first_only ? xml_node[tag(tagname)][0] : xml_node[tag(tagname)]
+    read(tagname, xml_node, params = {} ) {
+        params.first_only ??= true
+        params.always_create ??= false
+
+        if( tag(tagname) in xml_node || params.always_create )
+            this[tagname] = params.first_only ? xml_node[tag(tagname)][0] : xml_node[tag(tagname)]
     }
 
     getFather() {

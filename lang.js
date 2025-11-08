@@ -33,4 +33,7 @@ var magyar = {
 }
 
 
-module.exports = [english, magyar]
+module.exports = {
+    'english': english,
+    'magyar': magyar,
+}
