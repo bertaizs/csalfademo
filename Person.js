@@ -55,7 +55,11 @@ class Person {
     }
 
     getSiblings() {
-        return filterPeople(x=>((x.getFather()==this.getFather() || x.getMother()==this.getMother())) && x!=this )
+        return filterPeople(x=>(
+                ((x.getFather()==this.getFather()) && x.getFather())
+            ||  ((x.getMother()==this.getMother()) && x.getMother())
+        ) && x!=this 
+        )
     }
 
 
