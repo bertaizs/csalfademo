@@ -11,6 +11,7 @@ var options = {
     log_data: false,
     log_read_entities: true,
     log_people: false,
+    log_file_creation: true,
 
     interactive: true,
 

@@ -24,6 +24,16 @@ function tag(x) {
     return x;
 }
 
+function createFile( filename, content ) {
+    fs.writeFile(filename, content, err => {
+            if (err) {
+            console.error(err);
+        } else {
+            options.log_file_creation && console.log("created: "+filename)
+        }
+    });
+}
+
 
 
 /*
@@ -92,6 +102,8 @@ function csalfagen(data) {
 
     // console.log(alma)
 
+
+    createFile("test.txt", "isti vagyok!")
 
     // console.log( options )
     // console.log(data['élettárs'])
