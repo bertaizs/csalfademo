@@ -2,9 +2,12 @@
 
 var options = require('./options.js')
 
+var utils = require('./utils.js')
+var tag = utils.tag
 
 class Person {
 
+    // creates this Person by parsing the xml element of person_node
     constructor(person_node) {
         this.id = person_node['$'].id
         for( let i in person_node ) {
@@ -13,10 +16,10 @@ class Person {
         }
         console.log(this.id)
 
-        if( 'apja' in this )
-            this['father'] = this['apja']['$'].id
-        if( 'anyja' in this )
-            this['mother'] = this['anyja']['$'].id
+        if( tag('father') in this )
+            this['father'] = this[tag('father')]['$'].id
+        if( tag('mother') in this )
+            this['mother'] = this[tag('mother')]['$'].id
 
         options.log_read_entities || console.log(this.id)
     }
@@ -31,13 +34,27 @@ class Person {
     }
 
     getName() {
-        return this['vezetéknév']+" "+this['keresztnév']
+        return this['surname']+" "+this['given_name']
     }
 
     getId() { return this.id }
     getFileName() {
-        if( 'filename' in this ) return this.filename
-        return this.getId()
+        if( 'filename' in this ) return this.filename+".html"
+        return this.getId()+".html"
+    }
+
+    getNameLink() {
+        return `<a href="${this.getFileName()}">${this.getName()}</a>`
+    }
+
+    getBirthDate() {
+        return this.born_year
+    }
+    getDeathDate() {
+        if( 'died_year' in this ) {
+            return this.died_year
+        }
+        else return false
     }
 
 }

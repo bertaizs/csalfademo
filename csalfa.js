@@ -13,16 +13,14 @@ const REPL = require('repl')
 
 const xmlFilePath = path.join(__dirname, options.input_file);
 
+var utils = require('./utils.js')
+var tag = utils.tag
 
 var people = {}
 
 
 
-function tag(x) {
-    if( x in options.input_lang )
-        return options.input_lang[x]
-    return x;
-}
+
 
 function createFile( filename, content ) {
     fs.writeFile(filename, content, err => {
@@ -34,6 +32,43 @@ function createFile( filename, content ) {
     });
 }
 
+function personPage(who) {
+    let s=""
+    s+= `<html><head>
+    <title>${who.getName()}</title>
+	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+	<style>
+.adatlap_kep {
+	border: 0px solid red;
+	max-width: 90%;
+	max-height: 80vh;
+}
+	</style>
+    </head>
+    <body>
+    ${options.html_header}
+
+
+    <table style="border: 1px solid black; width: 100%;"><tr>
+    <td style="width: 50%;">pictures</td>
+    <td style="width: 50%;">
+        <h2>${who.getName()}</h2>
+
+        <p>(${who.getBirthDate()+' &ndash; '+( who.getDeathDate() || "" )})</p>
+
+        this is the page of ${who.getName()}.
+
+    </td>
+    </tr></table>
+    
+
+    ${options.html_footer}
+    </body>
+    </html>
+    `
+    return s
+}
 
 
 /*
@@ -100,13 +135,23 @@ function csalfagen(data) {
 
     console.log("--------")
 
-    // console.log(alma)
+
+    try {
+        if (!fs.existsSync(options.tree_dir)) {
+            fs.mkdirSync(options.tree_dir);
+        }
+        
+        for( let i in people )
+            createFile( options.tree_dir+'/'+people[i].getFileName(), personPage(people[i]) )
+
+    } catch (err) {
+        console.error(err);
+    }
 
 
-    createFile("test.txt", "isti vagyok!")
+    // createFile("test.txt", "isti vagyok!")
+    // createFile('luke.html', personPage(people['LukeSkywalker']))
 
-    // console.log( options )
-    // console.log(data['élettárs'])
     console.log("vége.")
 
     // if( options.interactive )
