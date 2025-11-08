@@ -72,6 +72,10 @@ class Person {
         else return false
     }
 
+    getBirthAndDeathDates() {
+        return (this.getBirthDate()||"")+' &ndash; '+(this.getDeathDate()||"")
+    }
+
 }
 
 

@@ -61,7 +61,7 @@ function personPage(who) {
     <td style="width: 50%;">
         <h2>${who.getName()}</h2>
 
-        <p>(${(who.getBirthDate()||"")+' &ndash; '+( who.getDeathDate() || "" )})</p>
+        <p>(${who.getBirthAndDeathDates()})</p>
     
         <p>${who.getFather() ? lang("Father")+": "+people[who.getFather().id].getNameLink() : "" }</p>
         <p>${who.getMother() ? lang("Mother")+": "+people[who.getMother().id].getNameLink() : "" }</p>
