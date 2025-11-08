@@ -70,5 +70,13 @@
 	<marriage who="AnakinSkywalker" whom="PadmeAmidala"/>
 	<marriage who="HanSolo" whom="LeiaOrgana" when="34 ABY"/>
 
+	<picture file="https://static.wikia.nocookie.net/starwars/images/6/6c/LukeSkywalker-RotJAVA.png/revision/latest?cb=20250314013820" comment="Return of the Jedi">
+		<shown who="LukeSkywalker"/>
+	</picture>
+
+	<picture file="https://static.wikia.nocookie.net/starwars/images/3/3d/LukeSkywalker.png/revision/latest?cb=20241221010122" comment="Old Luke">
+		<shown who="LukeSkywalker"/>
+	</picture>
+
 </family>
 

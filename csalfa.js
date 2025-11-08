@@ -3,9 +3,11 @@
 
 const fs = require('fs');
 const path = require('path');
-const xml2js = require('xml2js');
+
+
 
 const Person = require('./Person.js')
+const Picture = require('./Picture.js')
 
 const options = require('./options.js')
 
@@ -21,9 +23,7 @@ const listPeopleLinks = utils.listPeopleLinks
 
 const globals  = require('./globals.js')
 const people = globals.people
-
-console.log(people)
-
+const parser = globals.parser
 
 
 
@@ -88,11 +88,6 @@ function personPage(who) {
  */
 
 
-// Initialize the XML parser
-// The xml2js library allows configuration options, such as:
-// { explicitArray: false } to simplify single-item arrays (optional)
-const parser = new xml2js.Parser({ explicitArray: false });
-// const parser = new xml2js.Parser({ explicitArray: true });
 
 // parse the XML file and call csalfagen() if all goes well
 function parseXmlFile() {
@@ -139,8 +134,15 @@ function csalfagen(data) {
     options.log_data && console.log(data)
 
     for( let i in data[tag('person')] ) {
-        let p = new Person(data[tag('person')][i])
+        new Person(data[tag('person')][i])
     }
+
+    for( let i in data[tag('picture')] ) {
+        new Picture(data[tag('picture')][i])
+        console.log("pic")
+    }
+    throw "aaa"
+
 
     options.log_people && console.log( people )
 

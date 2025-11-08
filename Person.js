@@ -38,9 +38,6 @@ class Person {
 
     read(tagname, person_node) {
         this[tagname] = person_node[tag(tagname)]
-        // console.log(person_node)
-        // throw "mmmm"
-
     }
 
     getFather() {

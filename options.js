@@ -3,9 +3,9 @@ const [english, magyar] = require('./lang.js')
 
 var options = {
     version: "2.0",
-    input_lang: magyar,    // output language; english or magyar
+    input_lang: english,    // output language; english or magyar
     output_lang: english,    // output language; english or magyar
-    input_file: "csalfa.xml",
+    input_file: "skywalker.xml",
 
     tree_dir: "fa",     // without / at the end
 
