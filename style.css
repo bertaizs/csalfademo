@@ -1,0 +1,24 @@
+
+.pic {
+	border: 0px solid red;
+	max-width: 90%;
+	max-height: 80vh;
+}
+
+
+.person_page_table {
+    border: 0px solid red;
+    width: 100%;
+}
+
+.person_page_pictures {
+    width: 50%;
+    text-align: center;
+
+}
+
+.person_page_data {
+    width: 50%;
+    vertical-align: top;
+    
+}

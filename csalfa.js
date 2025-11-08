@@ -43,25 +43,19 @@ function personPage(who) {
     let s=""
     s+= `<html><head>
     <title>${who.getName()}</title>
-	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
-	<meta name='viewport' content='width=device-width, initial-scale=1.0'/>
-	<style>
-.pic {
-	border: 0px solid red;
-	max-width: 90%;
-	max-height: 80vh;
-}
-	</style>
+        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+        <link rel="stylesheet" href="../style.css">
     </head>
     <body>
     ${options.html_header}
 
 
-    <table style="border: 1px solid black; width: 100%;"><tr>
-    <td style="width: 50%;">${
+    <table class="person_page_table"><tr>
+    <td style="width: 50%;" class="person_page_pictures">${
         pictures.filter(x=>x.shown.includes(who.getId())).map(x=>x.getHtml()).join("\n")
     }</td>
-    <td style="width: 50%;">
+    <td style="width: 50%;" class="person_page_data">
         <h2>${who.getName()}</h2>
 
         <p>(${who.getBirthAndDeathDates()})</p>
@@ -73,7 +67,7 @@ function personPage(who) {
             who.getChildren().length>0 ? "<p>"+lang("Children")+": "+listPeopleLinks(who.getChildren()) : ""
         }
 
-        ${ who.getComment() }
+        ${ who.getComment() ? '<p>'+who.getComment()+'</p>' : "" }
 
     </td>
     </tr></table>

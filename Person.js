@@ -17,6 +17,9 @@ class Person {
     constructor(person_node) {
         this.id = person_node['$'].id
 
+
+
+        
         this.read('family_name', person_node)
         this.read('given_name', person_node)
         this.read('comment', person_node)
