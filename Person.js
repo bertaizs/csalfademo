@@ -24,6 +24,8 @@ class Person {
         this.read('born_year', person_node)
         this.read('died_year', person_node)
 
+        this.read('name', person_node, {first_only: false, always_create: true})
+
         if( tag('father') in person_node )
             this['father'] = ref2id( person_node[tag('father')][0]['$'].id )
 
@@ -39,7 +41,7 @@ class Person {
         params.always_create ??= false
 
         if( tag(tagname) in xml_node || params.always_create )
-            this[tagname] = params.first_only ? xml_node[tag(tagname)][0] : xml_node[tag(tagname)]
+            this[tagname] = params.first_only ? xml_node[tag(tagname)][0] : (xml_node[tag(tagname)] || [])
     }
 
     getFather() {
@@ -63,7 +65,6 @@ class Person {
         )
     }
 
-
     getName() {
         if( 'family_name' in this && 'given_name' in this ) {
             if( options.output_lang.family_name_first )
@@ -72,6 +73,10 @@ class Person {
                 return this['given_name']+" "+this['family_name']   // in e.g. English
         }
         return false
+    }
+
+    getAllNames() {
+        return [this.getName()].concat(this.name)
     }
 
     getId() { return this.id }

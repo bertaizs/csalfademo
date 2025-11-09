@@ -4,15 +4,13 @@
 const fs = require('fs');
 const path = require('path');
 
-
-
 const Person = require('./Person.js')
 const Picture = require('./Picture.js')
 
 const languages = require('./lang.js')
 const options = require('./options.js')
 
-const REPL = require('repl')
+// const REPL = require('repl')
 
 var utils = require('./utils.js')
 const tag = utils.tag
@@ -26,7 +24,6 @@ const parser = globals.parser
 const pictures = globals.pictures
 
 
-
 function createFile( filename, content ) {
     fs.writeFile(filename, content, err => {
             if (err) {
@@ -37,6 +34,12 @@ function createFile( filename, content ) {
     });
 }
 
+function prefix(prefix, str) {
+    if(str) return prefix+str
+    return ""
+}
+
+// returns the HTML datasheet of the Person who
 function personPage(who) {
     console.log( "personpage: "+who.id)
     let s=""
@@ -47,8 +50,7 @@ function personPage(who) {
         <link rel="stylesheet" href="../style.css">
     </head>
     <body>
-    ${options.html_header}
-
+        <div class="header">${options.html_header}</div>
 
     <table class="person_page_table"><tr>
     <td style="width: 50%;" class="person_page_pictures">${
@@ -57,28 +59,26 @@ function personPage(who) {
     <td style="width: 50%;" class="person_page_data">
         <h2>${who.getName()}</h2>
 
+        ${prefix( "aka: ", who.getAllNames().slice(1).join(", ") )}
+
         <p>(${who.getBirthAndDeathDates()})</p>
     
         <p>${who.getFather() ? lang("Father")+": "+people[who.getFather().id].getNameLink() : "" }</p>
         <p>${who.getMother() ? lang("Mother")+": "+people[who.getMother().id].getNameLink() : "" }</p>
-
         ${
             who.getSiblings().length>0 ? "<p>"+lang("Siblings")+": "+listPeopleLinks(who.getSiblings()) : ""
         }
         ${
             who.getChildren().length>0 ? "<p>"+lang("Children")+": "+listPeopleLinks(who.getChildren()) : ""
         }
-
         ${ who.getComment() ? '<p>'+who.getComment()+'</p>' : "" }
 
     </td>
     </tr></table>
     
-
-    <div class="footer">${options.html_footer}</div>
+        <div class="footer">${options.html_footer}</div>
     </body>
-    </html>
-    `
+    </html>`
     return s
 }
 
@@ -86,7 +86,6 @@ function personPage(who) {
 /*
  *      START
  */
-
 
 options.log_args && console.log( process.argv )
 
@@ -97,13 +96,7 @@ if( process.argv.length>=3)
 if( process.argv.length>=4)
     options.output_lang = languages[process.argv[4]]
 
-
 var xmlFilePath = path.join(__dirname, options.input_file);
-
-// console.log( options )
-
-// throw "kilép"
-
 
 // parse the XML file and call csalfagen() if all goes well
 function parseXmlFile() {
@@ -122,9 +115,8 @@ function parseXmlFile() {
                 return;
             }
             console.log('--- Successfully Parsed XML Data ---');
-            // console.log(JSON.stringify(result, null, 2));
+            // console.log(JSON.stringify(result, null, 2));    // this is to convert to json
             try {
-                // csalfagen(result['család'])
                 csalfagen(result[tag('family')])
             } catch (e) {
                 console.error('Error accessing data structure:', e);
@@ -141,10 +133,10 @@ if (fs.existsSync(xmlFilePath)) {
 }
 
 
-
-
-
-
+// the core part of Csalfa;
+// called when the xml file has already been parsed (data)
+// this function builds the csalfa data structures: 
+// people, array of Person ; pictures, array of Picture
 function csalfagen(data) {
     console.log("--- interpreting xml entities ---")
     options.log_data && console.log(data)
@@ -157,7 +149,6 @@ function csalfagen(data) {
     for( let i in data[tag('picture')] ) {
         new Picture(data[tag('picture')][i])
     }
-
 
     console.log("--- processing test cases ---")
 
