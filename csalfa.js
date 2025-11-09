@@ -114,7 +114,7 @@ function treePageLevel(who, p = {nextlevel: getParents, first: true}) {
         <table class="treepanel"><tr>
         ${ p.first ? '' : '<td class="treepanel">&mdash;</td>' }
         <td class="treepanel">
-                <div style="padding: 10px; text-align: center; ">
+                <div style="padding: 0px; text-align: center; ">
                     ${ who.getNameLink() }<br/>
                     ${who.getBirthAndDeathYears()}
                 </div>
@@ -126,7 +126,7 @@ function treePageLevel(who, p = {nextlevel: getParents, first: true}) {
         <td class="treepanel"><table class="treepanel">
         `
         for( let i in next ) {
-            s+= `<tr><td class="treepanel">`
+            s+= `<tr><td class="treepanel" style="padding-bottom: 10px;">`
             p.first = false
             s+= treePageLevel( next[i], p)
             s+= `</td></tr>`
@@ -150,9 +150,9 @@ function treePage(who, p = {label: "ancestors", nextlevel: 'getParents'} ) {
         <link rel="stylesheet" href="../style.css">
     </head>
     <body>
-        <div class="header">${options.html_header}</div>
+        <div class="header"><h1>${who.getName()} - ${p.label}</h1></div>
 
-        ${ treePageLevel(who, {'nextlevel': p.nextlevel}) }
+        ${ treePageLevel(who, {'nextlevel': p.nextlevel, first: true}) }
 
         <div class="footer">${options.html_footer}</div>        
     </body>
@@ -263,8 +263,8 @@ function csalfagen(data) {
 
         for( let i in people ) {
             createFile( options.tree_dir+'/'+people[i].getFileName(), personPage(people[i]) )
-            createFile( options.tree_dir+'/'+people[i].getFileName('ancestors'), treePage(people[i]) )
-            createFile( options.tree_dir+'/'+people[i].getFileName('descendants'), treePage(people[i], {label: "descendants", nextlevel: 'getChildren'}) )
+            createFile( options.tree_dir+'/'+people[i].getFileName('ancestors'), treePage(people[i],   {label: lang("ancestors"),   nextlevel: 'getParents'}) )
+            createFile( options.tree_dir+'/'+people[i].getFileName('descendants'), treePage(people[i], {label: lang("descendants"), nextlevel: 'getChildren'}) )
         }
         // createFile( options.tree_dir+'/'+"ancestors"+people['LukeSkywalker'].getFileName(), treePage(people['LukeSkywalker']) )
 
@@ -272,7 +272,7 @@ function csalfagen(data) {
         console.error(err);
     }
 
-    console.log("vége.")
+    console.log("--- end ---")
 
     // if( options.interactive )
     //     REPL.start()
