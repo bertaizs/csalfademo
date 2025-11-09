@@ -35,9 +35,13 @@ var magyar = {
 
     'comment': 'megjegyzés',
 
+    'marriage': 'házasság',
+    
     'picture':  'kép',
     'shown':    'látszik',
     'who':      'ki',
+    'whom':     'kivel',
+    'when':     'mikor',
     'newline':  'újsor',
 
     // strings
@@ -45,6 +49,8 @@ var magyar = {
     "Mother": "Anyja",
     "Children": "Gyermekei",
     "Siblings": "Testvérei",
+
+    "Spouse": "Házastársa",
 
     family_name_first: true,
 }

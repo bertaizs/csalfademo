@@ -6,8 +6,10 @@ const utils = require('./utils.js')
 const tag = utils.tag
 const filterPeople = utils.filterPeople
 const ref2id = utils.ref2id
+const lang = utils.lang
 
 const globals  = require('./globals.js')
+// const lang = require('./lang.js')
 const people = globals.people
 
 
@@ -32,6 +34,8 @@ class Person {
 
         if( tag('mother') in person_node )
             this['mother'] = ref2id( person_node[tag('mother')][0]['$'].id )
+
+        this.spouse = []
 
         people[this.id] = this
         options.log_read_entities && console.log(this.id)
@@ -125,10 +129,7 @@ class Person {
                         t.push(m[1])
 
                     m = data[i].match(/~(.*)/)
-                    // if( m ) {
-                    //     console.log(this)
-                    //     throw "kilép"
-                    // }
+
                     if( m && t.length>0 && !t[t.length-1].endsWith(m[1]))
                         t[t.length-1] += m[1]
                 }
@@ -151,6 +152,21 @@ class Person {
     getComment() {
         if( 'comment' in this ) return this.comment
         return ""
+    }
+
+    getMarriages() {
+        let s = ''
+        for( let i in this.spouse ) {
+            s+= `<p>`
+            s+= lang('Spouse')+": "
+            s+= people[this.spouse[i].with].getNameLink()
+            if( this.spouse[i].when )
+                s+= " ("+this.spouse[i].when+") "
+            if( this.spouse[i].comment )
+                s+= " - "+this.spouse[i].comment
+            s+= `</p>`
+        }
+        return s
     }
 
 }

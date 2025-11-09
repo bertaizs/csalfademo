@@ -6,6 +6,7 @@ const path = require('path');
 
 const Person = require('./Person.js')
 const Picture = require('./Picture.js')
+const Marriage = require('./Marriage.js')
 
 const languages = require('./lang.js')
 const options = require('./options.js')
@@ -76,6 +77,9 @@ function personPage(who) {
     
         <p>${who.getFather() ? lang("Father")+": "+people[who.getFather().id].getNameLink() : "" }</p>
         <p>${who.getMother() ? lang("Mother")+": "+people[who.getMother().id].getNameLink() : "" }</p>
+        ${
+            who.getMarriages()
+        }
         ${
             who.getSiblings().length>0 ? "<p>"+lang("Siblings")+": "+listPeopleLinks(who.getSiblings()) : ""
         }
@@ -178,9 +182,12 @@ function csalfagen(data) {
         new Picture(data[tag('picture')][i])
     }
 
+    for( let i in data[tag('marriage')] ) {
+        new Marriage(data[tag('marriage')][i])
+    }
+
     console.log("--- processing test cases ---")
 
-    // console.log( people['LukeSkywalker'].getFather().getNameLink() )
     // let kids = people['AnakinSkywalker'].getChildren()
     // console.log( listPeopleLinks(kids) )
 
