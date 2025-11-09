@@ -95,13 +95,13 @@ class Person {
         return `<a href="${this.getFileName()}">${this.getName()}</a>`
     }
 
-    getBirthDate() {
+    getBirthYear() {
         if( 'born_year' in this ) {
             return this.born_year
         }
         else return false
     }
-    getDeathDate() {
+    getDeathYear() {
         if( 'died_year' in this ) {
             return this.died_year
         }
@@ -109,7 +109,7 @@ class Person {
     }
 
     getBirthAndDeathYears() {
-        return (this.getBirthDate()||"")+' &ndash; '+(this.getDeathDate()||"")
+        return (this.getBirthYear()||"")+' &ndash; '+(this.getDeathYear()||"")
     }
 
     getBornData() {
