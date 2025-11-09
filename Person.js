@@ -97,13 +97,13 @@ class Person {
     getName() { return this.getAllNames()[0] }
 
     getId() { return this.id }
-    getFileName() {
-        if( 'filename' in this ) return this.filename+".html"
-        return this.getId()+".html"
+    getFileName( type = "") {
+        if( 'filename' in this ) return this.filename+(type?'_'+type:'')+".html"
+        return this.getId()+(type?'_'+type:'')+".html"
     }
 
-    getNameLink() {
-        return `<a href="${this.getFileName()}">${this.getName()}</a>`
+    getNameLink(type = "", text = "") {
+        return `<a href="${this.getFileName(type)}">${text?text:this.getName()}</a>`
     }
 
     getBirthYear() {

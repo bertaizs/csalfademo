@@ -89,6 +89,15 @@ function personPage(who) {
         }
         ${ who.getComment() ? '<p>'+who.getComment()+'</p>' : "" }
 
+        <p>&nbsp;</p>
+
+        ${
+            asdiv(who.getParents().length>0 ? who.getNameLink('ancestors', lang("ancestors")+"...") : "")
+        }
+        ${
+            asdiv(who.getChildren().length>0 ? who.getNameLink('descendants', lang("descendants")+"...") : "")
+        }
+
     </td>
     </tr></table>
     
@@ -99,19 +108,26 @@ function personPage(who) {
 }
 
 
-function treePageLevel(who, p = {nextlevel: getParents}) {
+function treePageLevel(who, p = {nextlevel: getParents, first: true}) {
     let next = who[p.nextlevel]()
     let s = `
-        <table><tr>
-        <td class="${next.length>0 ? 'treepanel' : ''}">
-
-            ${ who.getNameLink() }<br/>
-            ${who.getBirthAndDeathYears()}
-
-        </td><td><table>
+        <table class="treepanel"><tr>
+        ${ p.first ? '' : '<td class="treepanel">&mdash;</td>' }
+        <td class="treepanel">
+                <div style="padding: 10px; text-align: center; ">
+                    ${ who.getNameLink() }<br/>
+                    ${who.getBirthAndDeathYears()}
+                </div>
+        </td>
+        ${
+            next.length>0 ? '<td class="treepanel treepanel_key">&mdash;</td>' : ''
+        }
+        
+        <td class="treepanel"><table class="treepanel">
         `
         for( let i in next ) {
-            s+= `<tr><td>`
+            s+= `<tr><td class="treepanel">`
+            p.first = false
             s+= treePageLevel( next[i], p)
             s+= `</td></tr>`
         }
@@ -123,12 +139,12 @@ function treePageLevel(who, p = {nextlevel: getParents}) {
     return s
 }
 
-function treePage(who, label = "ancestors", nextlevel = 'getParents') {
-    console.log( "treepage: "+who.id+", "+label)
+function treePage(who, p = {label: "ancestors", nextlevel: 'getParents'} ) {
+    console.log( "treepage: "+who.id+", "+p.label)
     let s=""
     s+= `<!DOCTYPE html>
     <html><head>
-    <title>${who.getName()} - ${label}</title>
+    <title>${who.getName()} - ${p.label}</title>
         <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
         <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
         <link rel="stylesheet" href="../style.css">
@@ -136,7 +152,7 @@ function treePage(who, label = "ancestors", nextlevel = 'getParents') {
     <body>
         <div class="header">${options.html_header}</div>
 
-        ${ treePageLevel(who, {'nextlevel': nextlevel}) }
+        ${ treePageLevel(who, {'nextlevel': p.nextlevel}) }
 
         <div class="footer">${options.html_footer}</div>        
     </body>
@@ -245,11 +261,12 @@ function csalfagen(data) {
             fs.mkdirSync(options.tree_dir);
         }
 
-        for( let i in people )
+        for( let i in people ) {
             createFile( options.tree_dir+'/'+people[i].getFileName(), personPage(people[i]) )
-
-
-        createFile( options.tree_dir+'/'+"ancestors"+people['LukeSkywalker'].getFileName(), treePage(people['LukeSkywalker']) )
+            createFile( options.tree_dir+'/'+people[i].getFileName('ancestors'), treePage(people[i]) )
+            createFile( options.tree_dir+'/'+people[i].getFileName('descendants'), treePage(people[i], {label: "descendants", nextlevel: 'getChildren'}) )
+        }
+        // createFile( options.tree_dir+'/'+"ancestors"+people['LukeSkywalker'].getFileName(), treePage(people['LukeSkywalker']) )
 
     } catch (err) {
         console.error(err);

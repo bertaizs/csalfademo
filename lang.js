@@ -53,6 +53,9 @@ var magyar = {
 
     "Spouse": "Házastársa",
 
+    "ancestors": "felmenői",
+    "descendants": "leszármazottai",
+
     family_name_first: true,
 }
 
