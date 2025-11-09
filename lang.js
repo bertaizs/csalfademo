@@ -16,6 +16,7 @@ var magyar = {
     'family_name': 'vezetéknév',
     'given_name': 'keresztnév',
     'name': 'név',
+    'prefix': 'előtag',
 
     'born_year': 'születési_év',
     'born_month': 'születési_hónap',

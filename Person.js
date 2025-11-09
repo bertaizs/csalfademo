@@ -20,6 +20,7 @@ class Person {
 
         this.read('family_name', person_node)
         this.read('given_name', person_node)
+        this.read('prefix', person_node)
         this.read('comment', person_node)
         this.read('born_year', person_node)
         this.read('died_year', person_node)
@@ -41,7 +42,9 @@ class Person {
         params.always_create ??= false
 
         if( tag(tagname) in xml_node || params.always_create )
-            this[tagname] = params.first_only ? xml_node[tag(tagname)][0] : (xml_node[tag(tagname)] || [])
+            this[tagname] = params.first_only ? 
+                                xml_node[tag(tagname)][0] || "": 
+                                (xml_node[tag(tagname)] || [])
     }
 
     getFather() {
@@ -65,19 +68,22 @@ class Person {
         )
     }
 
-    getName() {
+    getNameFromParts() {
         if( 'family_name' in this && 'given_name' in this ) {
             if( options.output_lang.family_name_first )
-                return this['family_name']+" "+this['given_name']   // in e.g. Hungarian
+                return [this['prefix'], this['family_name'], this['given_name']].join(" ") // Hungarian
             else
-                return this['given_name']+" "+this['family_name']   // in e.g. English
+                return [this['prefix'], this['given_name'], this['family_name']].join(" ") // English
+                // return this['given_name']+" "+this['family_name']   // in e.g. English
         }
         return false
     }
 
     getAllNames() {
-        return [this.getName()].concat(this.name)
+        return [this.getNameFromParts()].concat(this.name)
     }
+
+    getName() { return this.getAllNames()[0] }
 
     getId() { return this.id }
     getFileName() {
