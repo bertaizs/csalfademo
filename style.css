@@ -26,3 +26,8 @@
 .footer {
     color: lightgray;
 }
+
+.treepanel {
+    /* border: 1px solid black; */
+    border-right: 5px solid blue;
+}

@@ -60,6 +60,13 @@ class Person {
         return null
     }
 
+    getParents() {
+        let t = []
+        if( this.getFather() ) t.push( this.getFather() )
+        if( this.getMother() ) t.push( this.getMother() )
+        return t
+    }
+
     getChildren() {
         return filterPeople(x=>(x.getFather()==this || x.getMother()==this))
     }

@@ -52,7 +52,8 @@ function asdiv(str, div = 'div') {
 function personPage(who) {
     console.log( "personpage: "+who.id)
     let s=""
-    s+= `<html><head>
+    s+= `<!DOCTYPE html>
+    <html><head>
     <title>${who.getName()}</title>
         <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
         <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
@@ -97,6 +98,51 @@ function personPage(who) {
     return s
 }
 
+
+function treePageLevel(who, p = {nextlevel: getParents}) {
+    let next = who[p.nextlevel]()
+    let s = `
+        <table><tr>
+        <td class="${next.length>0 ? 'treepanel' : ''}">
+
+            ${ who.getNameLink() }<br/>
+            ${who.getBirthAndDeathYears()}
+
+        </td><td><table>
+        `
+        for( let i in next ) {
+            s+= `<tr><td>`
+            s+= treePageLevel( next[i], p)
+            s+= `</td></tr>`
+        }
+
+    s+= `
+        </table></td>
+        </tr></table>
+    `
+    return s
+}
+
+function treePage(who, label = "ancestors", nextlevel = 'getParents') {
+    console.log( "treepage: "+who.id+", "+label)
+    let s=""
+    s+= `<!DOCTYPE html>
+    <html><head>
+    <title>${who.getName()} - ${label}</title>
+        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+        <link rel="stylesheet" href="../style.css">
+    </head>
+    <body>
+        <div class="header">${options.html_header}</div>
+
+        ${ treePageLevel(who, {'nextlevel': nextlevel}) }
+
+        <div class="footer">${options.html_footer}</div>        
+    </body>
+    </html>`
+    return s
+}
 
 /*
  *      START
@@ -201,6 +247,9 @@ function csalfagen(data) {
 
         for( let i in people )
             createFile( options.tree_dir+'/'+people[i].getFileName(), personPage(people[i]) )
+
+
+        createFile( options.tree_dir+'/'+"ancestors"+people['LukeSkywalker'].getFileName(), treePage(people['LukeSkywalker']) )
 
     } catch (err) {
         console.error(err);
