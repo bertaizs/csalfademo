@@ -22,13 +22,17 @@ class Marriage {
         let t = {'with': whom }
         t['when'] = xml_node['$'][tag('when')]
         t['comment'] = xml_node['$'][tag('comment')]
-
+        t['label'] = xml_node['$'][tag('label')]
+        // if( t.label ) {
+        //     console.log(t)
+        // throw "kilép"
+        //     }
 
         people[who].spouse.push( t )
         let t2 = structuredClone(t)
         t2.with = who
         people[whom].spouse.push( t2 )
-        // throw "kilép"
+
     }
 }
 

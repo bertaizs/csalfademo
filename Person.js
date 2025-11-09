@@ -158,7 +158,7 @@ class Person {
         let s = ''
         for( let i in this.spouse ) {
             s+= `<p>`
-            s+= lang('Spouse')+": "
+            s+= lang(this.spouse[i].label ?? 'Spouse')+": "
             s+= people[this.spouse[i].with].getNameLink()
             if( this.spouse[i].when )
                 s+= " ("+this.spouse[i].when+") "

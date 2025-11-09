@@ -36,6 +36,7 @@ var magyar = {
     'comment': 'megjegyzés',
 
     'marriage': 'házasság',
+    'label':    'címke',
     
     'picture':  'kép',
     'shown':    'látszik',
