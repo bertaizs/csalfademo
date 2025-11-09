@@ -73,6 +73,9 @@ function personPage(who) {
         ${asdiv(    
             who.getBornData()
         )}
+        ${asdiv(    
+            who.getDiedData()
+        )}
     
         <p>${who.getFather() ? lang("Father")+": "+people[who.getFather().id].getNameLink() : "" }</p>
         <p>${who.getMother() ? lang("Mother")+": "+people[who.getMother().id].getNameLink() : "" }</p>
