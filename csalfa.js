@@ -267,6 +267,8 @@ function csalfagen(data) {
             createFile( options.tree_dir+'/'+people[i].getFileName('descendants'), treePage(people[i], {label: lang("descendants"), nextlevel: 'getChildren'}) )
         }
         // createFile( options.tree_dir+'/'+"ancestors"+people['LukeSkywalker'].getFileName(), treePage(people['LukeSkywalker']) )
+	
+	createFile( options.web_dir+'/index.html', options.index_html )
 
     } catch (err) {
         console.error(err);
