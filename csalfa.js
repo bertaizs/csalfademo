@@ -89,12 +89,29 @@ function personPage(who) {
 
 options.log_args && console.log( process.argv )
 
-if( process.argv.length>=2)
-    options.input_file = process.argv[2]
-if( process.argv.length>=3)
-    options.input_lang = languages[process.argv[3]]
-if( process.argv.length>=4)
-    options.output_lang = languages[process.argv[4]]
+// if( process.argv.length>=2)
+//     options.input_file = process.argv[2]
+// if( process.argv.length>=3)
+//     options.input_lang = languages[process.argv[3]]
+// if( process.argv.length>=4)
+//     options.output_lang = languages[process.argv[4]]
+
+var custom_options = {}
+if( process.argv.length>2)
+    custom_options = require(process.argv[2])
+
+// console.log(custom_options)
+
+for( let i in custom_options )
+    options[i] = custom_options[i]
+
+if( typeof options.input_lang == 'string' )
+    options.input_lang = languages[options.input_lang]
+if( typeof options.output_lang == 'string' )
+    options.output_lang = languages[options.output_lang]
+console.log(options)
+
+// throw "kilép"
 
 var xmlFilePath = path.join(__dirname, options.input_file);
 

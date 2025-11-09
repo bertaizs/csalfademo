@@ -1,6 +1,9 @@
 
 skywalker:
-	node .\csalfa.js skywalker.xml english english
+	node .\csalfa.js 
+# 	node .\csalfa.js skywalker.xml english english
 
 csalfa:
-	node .\csalfa.js csalfa.xml magyar magyar
+	node .\csalfa.js ./berta.js
+# 	node .\csalfa.js csalfa.xml magyar magyar
+
