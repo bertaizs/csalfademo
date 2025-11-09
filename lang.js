@@ -6,6 +6,7 @@ var english = {
     family_name_first: false,
 
     born_data: ['born_month', 'born_day', 'born_year'],
+    died_data: ['died_month', 'died_day', 'died_year'],
 }
 
 var magyar = {
@@ -29,7 +30,8 @@ var magyar = {
     'died_day': 'halálozási_nap',
     'died_place': 'halálozási_place',
 
-    born_data: ['born_year', 'born_month', 'born_day'],
+    born_data: ['"Született:"', 'born_year', '~.', 'born_month', 'born_day', '~.'],
+    died_data: ['"Meghalt: "', 'died_year', '~.', 'died_month', 'died_day', '~.'],
 
     'comment': 'megjegyzés',
 
@@ -41,7 +43,8 @@ var magyar = {
     // strings
     "Father": "Apja",
     "Mother": "Anyja",
-    "Childeren": "Gyermekei",
+    "Children": "Gyermekei",
+    "Siblings": "Testvérei",
 
     family_name_first: true,
 }

@@ -112,18 +112,41 @@ class Person {
         return (this.getBirthYear()||"")+' &ndash; '+(this.getDeathYear()||"")
     }
 
-    getBornData() {
+    getData(data) {
         // let s = ""
         if( 'born_year' in this ) {
             let t = []
-            for( let i in options.output_lang.born_data ) {
-                if( this[options.output_lang.born_data[i]] )
-                    t.push(this[options.output_lang.born_data[i]])
+            for( let i in data ) {
+                if( this[data[i]] )
+                    t.push(this[data[i]])
+                else {
+                    let m = data[i].match(/"(.*)"/)
+                    if( m )
+                        t.push(m[1])
+
+                    m = data[i].match(/~(.*)/)
+                    // if( m ) {
+                    //     console.log(this)
+                    //     throw "kilép"
+                    // }
+                    if( m && t.length>0 && !t[t.length-1].endsWith(m[1]))
+                        t[t.length-1] += m[1]
+                }
             }
             return t.join(" ")
         }
         return ""
     }
+
+    hasDetailedBornDate() {
+        return ('born_month' in this && this['born_month']!='?')
+    }
+    hasDetailedDiedDate() {
+        return ('died_month' in this && this['died_month']!='?')
+    }
+
+    getBornData() { return this.hasDetailedBornDate() ? this.getData(options.output_lang.born_data) : "" }
+    getDiedData() { return this.hasDetailedDiedDate() ? this.getData(options.output_lang.died_data) : "" }
 
     getComment() {
         if( 'comment' in this ) return this.comment
