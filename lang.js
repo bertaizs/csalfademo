@@ -4,6 +4,8 @@ var english = {
     // 'person': 'person',
 
     family_name_first: false,
+
+    born_data: ['born_month', 'born_day', 'born_year'],
 }
 
 var magyar = {
@@ -26,6 +28,8 @@ var magyar = {
     'died_month': 'halálozási_hónap',
     'died_day': 'halálozási_nap',
     'died_place': 'halálozási_place',
+
+    born_data: ['born_year', 'born_month', 'born_day'],
 
     'comment': 'megjegyzés',
 

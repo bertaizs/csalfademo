@@ -34,9 +34,16 @@ function createFile( filename, content ) {
     });
 }
 
+// if str is not empty then returns it with a prefix
 function prefix(prefix, str) {
     if(str) return prefix+str
     return ""
+}
+
+// if str is not empty then returns it wrapped into div html tags
+function asdiv(str, div = 'div') {
+    if( str )
+        return `<${div}>${str}</${div}>`
 }
 
 // returns the HTML datasheet of the Person who
@@ -61,7 +68,11 @@ function personPage(who) {
 
         ${prefix( "aka: ", who.getAllNames().slice(1).join(", ") )}
 
-        <p>(${who.getBirthAndDeathDates()})</p>
+        <p>(${who.getBirthAndDeathYears()})</p>
+
+        ${asdiv(    
+            who.getBornData()
+        )}
     
         <p>${who.getFather() ? lang("Father")+": "+people[who.getFather().id].getNameLink() : "" }</p>
         <p>${who.getMother() ? lang("Mother")+": "+people[who.getMother().id].getNameLink() : "" }</p>

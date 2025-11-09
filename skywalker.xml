@@ -31,7 +31,9 @@
 		<mother id="ShmiSkywalker"/>
 
 		<born_year>41 BBY</born_year>
+		<born_place>Tatooine</born_place>
 		<died_year>4 ABY</died_year>
+		<died_place>Death Star II, Endor system</died_place>
 
 		<comment>Joined the dark side as Darth Vader in 19 BBY.</comment>
 	</person>

@@ -18,12 +18,12 @@ class Person {
     constructor(person_node) {
         this.id = ref2id(person_node['$'].id)
 
-        this.read('family_name', person_node)
-        this.read('given_name', person_node)
-        this.read('prefix', person_node)
-        this.read('comment', person_node)
-        this.read('born_year', person_node)
-        this.read('died_year', person_node)
+        let data = [    'family_name', 'given_name', 'prefix', 'comment',
+                        'born_year', 'born_month', 'born_day', 'born_place',
+                        'died_year', 'died_month', 'died_day', 'died_place',
+                    ]
+        for( let i in data )
+            this.read( data[i], person_node )
 
         this.read('name', person_node, {first_only: false, always_create: true})
 
@@ -108,8 +108,21 @@ class Person {
         else return false
     }
 
-    getBirthAndDeathDates() {
+    getBirthAndDeathYears() {
         return (this.getBirthDate()||"")+' &ndash; '+(this.getDeathDate()||"")
+    }
+
+    getBornData() {
+        // let s = ""
+        if( 'born_year' in this ) {
+            let t = []
+            for( let i in options.output_lang.born_data ) {
+                if( this[options.output_lang.born_data[i]] )
+                    t.push(this[options.output_lang.born_data[i]])
+            }
+            return t.join(" ")
+        }
+        return ""
     }
 
     getComment() {
