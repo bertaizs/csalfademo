@@ -16,6 +16,7 @@ The plan was to build technology that lasts, so that it is:
 
 Today there are flashy sites where you can upload and share family data. This tool is for people who don't want to use those.
 
+
 # How Csalfa works?
 
 Csalfa consists of the following:
@@ -37,6 +38,7 @@ The demo uses [this xml file](https://csalfademo.berta.hu/skywalker.xml).
 
 # What did I learn?
 
+
 # XML format
 
 The outer element of the XML is called `family`. The following elements can reside inside this outer element:
@@ -47,22 +49,48 @@ The outer element of the XML is called `family`. The following elements can resi
    - `prefix`: e.g. 'Dr.' or 'Jr.', there can be only one
    - `name`: unstructured name of the person; there can be more. The 'name' of the person is either a combination of `family_name`, `given_name` and `prefix` or the first `name` element
 
-   - `birth_year`: string, optional; family data is suprisingly unstructure; the more you go back in time the more people you will see where this is unknown '?' or somewhat uncertain '184x' or completely missing
+   - `birth_year`: string, optional; family data is suprisingly unstructured; the more you go back in time the more people you will see where this is unknown '?' or somewhat uncertain '184x' or completely missing
    - `birth_month`, `birth_day`, `birth_place`: other optional strings;
    - `death_year`: string, optional; *the person is considered dead if this is populated*
    - `death_month`, `death_day`, `death_place`: other optional strings;
 
    - `father` and `mother`: these must have an attribute either called `id` or `ref` which points to the `person` who is this person's biological father/mother
 
-   - `comment` anything
+   - `comment`: anything
 
-* `marriage`: Delares a marriage between two `person`s. Must have two attributes `who` and `whom` containing the `id`s of the person referred. There is no differentiation between the two parties. The referred `person`s must already be defined in the XML file. This element can contain the below optional attributes:
+* `marriage`: Declares a marriage between two `person`s. Must have two attributes `who` and `whom` containing the `id`s of the person referred. There is no differentiation between the two parties. The referred `person`s must already be defined in the XML file. This element can contain the below optional attributes:
    - `when`: date of the marriage or info about that, string
    - `comment`: string
-   - `label`: by default the person married to someone is dispalyed as 'Spouse'; if `label` is present, that will display instead (e.g. 'Partner').
+   - `label`: by default the person married to someone is displayed as 'Spouse'; if `label` is present, that will be displayed instead (e.g. 'Partner').
 
 * `picture`: Declares a picture. Must have an attribute `file` which is a path+filename or URL where the file is found. Sub elements:
    - `shown`: its attribute `who` refers to the `person`s `id`.
+
+[Example csalfa XML file](https://csalfademo.berta.hu/skywalker.xml).
+
+
+# Options
+
+The file options.js contains:
+
+- input_file: the XML file to be used
+- input_lang: language of the input XML file (i.e. tag names)
+- output_lang: language of the output HTML files
+- web_dir: this is where the output goes
+- tree_dir: this is where the family tree HTML files go
+
+
+If the script receives a command-line parameter, it reads it as a js file which overrides what is set in options.js.
+
+
+# Dependencies
+
+The tool generating Csalfa output runs under node.js and uses xml2js for parsing the XML. It can be installed as
+
+`npm install xml2js`
+
+Viewing the output does not need any special tool.
+
 
 # History
 The original csalfa generator was written in 1990s in Java.
@@ -72,12 +100,8 @@ Later on it was rewritten in PHP. It did not turn out robust enough, and was dif
 The current version is in JavaScript / node.js.
 
 
-
 # Todo
 
-
-
-todo:
 * pics dir
 * upload scripts, app.yaml
 * good footer

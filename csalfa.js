@@ -108,7 +108,7 @@ function personPage(who) {
 }
 
 
-function treePageLevel(who, p = {nextlevel: getParents, first: true}) {
+function treePageLevel2(who, p = {nextlevel: getParents, first: true}) {
     let next = who[p.nextlevel]()
     let s = `
         <table class="treepanel"><tr>
@@ -138,6 +138,64 @@ function treePageLevel(who, p = {nextlevel: getParents, first: true}) {
     `
     return s
 }
+
+function treePageLevel(who, p = {nextlevel: getParents, first: true}) {
+    let next = who[p.nextlevel]()
+
+    // the first column of a table shows the current person
+    let s = `<table class="treepanel" style="border: 0px solid red; padding: 0px; border-spacing: 0px;"><tr>
+        <td class="treepanel">
+                <div style="padding: 0px; text-align: center; width: 10em;">
+                    ${ who.getNameLink() }<br/>
+                    ${who.getBirthAndDeathYears()}
+                </div>
+        </td>`
+    
+    if( next.length > 0 ) {
+        // horizontal line in the middle
+        s+= `   
+        <td class="treepanel" style="height: 100%;">
+            <table style="width: 100%; height: 100%; padding: 0px; border-spacing: 0px;">
+                <tr><td class="treepanel" style="border-bottom: 1px solid black;">&nbsp;</td></tr>
+                <tr><td>&nbsp;</td></tr>
+            </table>
+		</td>
+        <td>
+			<table style="padding: 0; border-spacing: 0px;">`
+
+        // the second next column shows the next level of the tree, a for loop on next
+        // the next column shall display the lines connecting these
+        for( let i=0; i<next.length; i++ ) {
+            upper_style = 'border-bottom: 1px solid black;';
+            lower_style = ''
+            if( i!=next.length-1 ) // not the last line
+                lower_style += 'border-left: 1px solid black;'
+            if( i!= 0 ) // not the first line
+                upper_style += 'border-left: 1px solid black;'
+
+            s+= `<tr>
+                <td class="treepanel" style="height: 100%;">
+                    <table style="padding: 0; border-spacing: 0; height: 100%;"><tr>
+                        <td class="treepanel" style="width: 10px; ${upper_style}">&nbsp;</td>
+                    </tr><tr>
+                        <td class="treepanel" style="width: 10px; ${lower_style} ">&nbsp;</td>
+                    </tr></table>
+                </td>
+                <td class="treepanel">
+                    ${ treePageLevel( next[i], p) }
+                </td>
+                </tr>
+            `
+
+        }
+        s+= `  </tr></table>`
+    
+    }
+
+    s+= `</td><tr></table>`
+    return s
+}
+
 
 function treePage(who, p = {label: "ancestors", nextlevel: 'getParents'} ) {
     console.log( "treepage: "+who.id+", "+p.label)

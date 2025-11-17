@@ -2,8 +2,8 @@
 # generates family tree for the Skywalker family; demo only
 skywalker:
 	node ./csalfa.js 
-	cp skywalker.xml www/
-	cp style.css www/
+#	cp skywalker.xml www/
+#	cp style.css www/
 
 
 upload: skywalker
